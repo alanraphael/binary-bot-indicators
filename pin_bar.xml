@@ -1,0 +1,353 @@
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+  <block type="procedures_defreturn" id="R{P*5.$[qQr[ME)yn?xX" x="440" y="148">
+    <mutation>
+      <arg name="PB:candle"></arg>
+    </mutation>
+    <field name="NAME">Pin Bar</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="variables_set" id="FDC3q/E^BZul/VuT5[jT">
+        <field name="VAR">PB:body</field>
+        <value name="VALUE">
+          <block type="math_single" id="i~Y60RB(/9JWnoBFC1-;">
+            <field name="OP">ABS</field>
+            <value name="NUM">
+              <shadow type="math_number" id=":to6XTzxD8]}=#SJwI}6">
+                <field name="NUM">9</field>
+              </shadow>
+              <block type="math_arithmetic" id="Pv9(Sh|:`NI91T!z!mBz">
+                <field name="OP">MINUS</field>
+                <value name="A">
+                  <shadow type="math_number" id="%lR]M6%4LEy)MN85jpJk">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="read_ohlc_obj" id="uQIc?YEEc8)Z]W@yGX0X">
+                    <field name="OHLCFIELD_LIST">open</field>
+                    <value name="OHLCOBJ">
+                      <block type="variables_get" id="oH@~}4.9^9p`jM)N3-c,">
+                        <field name="VAR">PB:candle</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="?PM9Fv9XjN|XXbpz_KZ=">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="read_ohlc_obj" id="}W$3T5se95[1`Y-a.ej2">
+                    <field name="OHLCFIELD_LIST">close</field>
+                    <value name="OHLCOBJ">
+                      <block type="variables_get" id="jwEwn;3DUrQzk(IrYNTV">
+                        <field name="VAR">PB:candle</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="_YiEMG)Dv4bt=StZBEST">
+            <field name="VAR">PB:trail_size</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="[Xbj{^;tm(mR/.M6w`8h">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number" id="^GTVB`aNho@k(`7u~P.q">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="zJtYE1afLkm,Oj(u?:lT">
+                    <field name="VAR">PB:body</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="w.X*l`HMV!i)hq;1JuBj">
+                    <field name="NUM">2</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="wS1(MXj};aFi_5-vA[e:">
+                <field name="VAR">PB:return</field>
+                <value name="VALUE">
+                  <block type="logic_boolean" id="9~t5i7h2beX=JWy+37ER">
+                    <field name="BOOL">FALSE</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="vQ9L47*D}BE?iPFE/HQ6">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="2sE3[0aOFX#28Ov|B6:7">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="read_ohlc_obj" id="+oAS}Jx8~?@`h5|uYd0^">
+                            <field name="OHLCFIELD_LIST">close</field>
+                            <value name="OHLCOBJ">
+                              <block type="variables_get" id="a:oeFlzA=Nhu7p:JtvL4">
+                                <field name="VAR">PB:candle</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="read_ohlc_obj" id="#=dpn]Kz!%fH,dhTDS7Y">
+                            <field name="OHLCFIELD_LIST">open</field>
+                            <value name="OHLCOBJ">
+                              <block type="variables_get" id="#OkH;=02/Qx45^SBOfkM">
+                                <field name="VAR">PB:candle</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="*B1LRsLOqyRt7%O!1bb_">
+                        <field name="VAR">PB:trail</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="R(GtcQC57VrgdH%SfuLG">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <shadow type="math_number" id="S`N3=dVQ+dw:/6CkQC]O">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="read_ohlc_obj" id="[y[Pzi?Ok|Y1NiT}wb(|">
+                                <field name="OHLCFIELD_LIST">high</field>
+                                <value name="OHLCOBJ">
+                                  <block type="variables_get" id="_oTm5o,0*W^G*CBb^3?O">
+                                    <field name="VAR">PB:candle</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="T-fH*Y%g.;=k9)n*Lnub">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="read_ohlc_obj" id="9hBOZ}fMme/yejpruJCB">
+                                <field name="OHLCFIELD_LIST">close</field>
+                                <value name="OHLCOBJ">
+                                  <block type="variables_get" id=",@R({+LNO1dHAA.2(G_)">
+                                    <field name="VAR">PB:candle</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="variables_set" id="d@WbU#p/fv~yh$Y%QfC@">
+                        <field name="VAR">PB:trail</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="ffM9CkTDN(/Qa:+DyyC2">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <shadow type="math_number" id="S`N3=dVQ+dw:/6CkQC]O">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="read_ohlc_obj" id="7Z},TR~`3D$n.axX_j}b">
+                                <field name="OHLCFIELD_LIST">high</field>
+                                <value name="OHLCOBJ">
+                                  <block type="variables_get" id="fLqx@3XHH@o.$Z*Ew1CR">
+                                    <field name="VAR">PB:candle</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="T-fH*Y%g.;=k9)n*Lnub">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="read_ohlc_obj" id="_e0nIJmSxn}sS?)/FVw*">
+                                <field name="OHLCFIELD_LIST">open</field>
+                                <value name="OHLCOBJ">
+                                  <block type="variables_get" id="U@I9=Lkm-A?wBhpw6d2{">
+                                    <field name="VAR">PB:candle</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="6JVi@dHfXzu}}YcDI.P8">
+                        <value name="IF0">
+                          <block type="logic_compare" id="n}d`_eSw`a$=4SWgRD!a">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="variables_get" id="ArEQS%JJ6lzczZ*cy~Ic">
+                                <field name="VAR">PB:trail</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id=")*]`Ye@}G`:3c%x*W[%.">
+                                <field name="VAR">PB:trail_size</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="lK6k1s;o]Qu6XhKr@LS^">
+                            <field name="VAR">PB:return</field>
+                            <value name="VALUE">
+                              <block type="text" id="iTu5Witq?a#:_h%YI52N">
+                                <field name="TEXT">PUT</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if" id="c=|e@]=a[MtB:Xg}6VPY">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="6N?_Qe`Q1Gq+PS,jceUS">
+                                <field name="OP">LT</field>
+                                <value name="A">
+                                  <block type="read_ohlc_obj" id="lD8$d5g*rVhv/j5%s:or">
+                                    <field name="OHLCFIELD_LIST">close</field>
+                                    <value name="OHLCOBJ">
+                                      <block type="variables_get" id="v{+Oiy5e-5QDLU2Ny@^7">
+                                        <field name="VAR">PB:candle</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="read_ohlc_obj" id="o#(`=z70[kc@-1xisQYJ">
+                                    <field name="OHLCFIELD_LIST">open</field>
+                                    <value name="OHLCOBJ">
+                                      <block type="variables_get" id="%JoKxEG#}cJUi(~s3)|?">
+                                        <field name="VAR">PB:candle</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="0C[|_nZfa1Fyr|%Sr`qG">
+                                <field name="VAR">PB:trail</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic" id="s66cKe#tc+q.mi1oK|I3">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="S`N3=dVQ+dw:/6CkQC]O">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="read_ohlc_obj" id="/6k?IHG}]~Iq~A`3O]x1">
+                                        <field name="OHLCFIELD_LIST">close</field>
+                                        <value name="OHLCOBJ">
+                                          <block type="variables_get" id="x`(U3oq[v2Ag`zJ*9,O9">
+                                            <field name="VAR">PB:candle</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="T-fH*Y%g.;=k9)n*Lnub">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="read_ohlc_obj" id="Dgw!uCJew;/tQ=XaFFux">
+                                        <field name="OHLCFIELD_LIST">low</field>
+                                        <value name="OHLCOBJ">
+                                          <block type="variables_get" id="nU^0uRMhNm(E/^2Bf36p">
+                                            <field name="VAR">PB:candle</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="variables_set" id="H:*B{5Y_B$V2GKCK,(sW">
+                                <field name="VAR">PB:trail</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic" id="KFzFc{BN_r?cwb-WH8/S">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="S`N3=dVQ+dw:/6CkQC]O">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="read_ohlc_obj" id="x#8pY%Ds5zJ~-+dfx`2U">
+                                        <field name="OHLCFIELD_LIST">open</field>
+                                        <value name="OHLCOBJ">
+                                          <block type="variables_get" id="F@M+#:YWk^OaSRcJTtzc">
+                                            <field name="VAR">PB:candle</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="T-fH*Y%g.;=k9)n*Lnub">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="read_ohlc_obj" id="GIOjgARp,SRpFpx;NUf/">
+                                        <field name="OHLCFIELD_LIST">low</field>
+                                        <value name="OHLCOBJ">
+                                          <block type="variables_get" id="_/J*``Kw4R^]@x_lA,cU">
+                                            <field name="VAR">PB:candle</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="uq:HHseml[)L@h;#]!r+">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="^K|UbulNv)U.!N6u(1K-">
+                                    <field name="OP">GTE</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="P{AJwZC]D`50ThOl?CAP">
+                                        <field name="VAR">PB:trail</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="M}.XA+lR^,-5wDn|@8Cu">
+                                        <field name="VAR">PB:trail_size</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="?%M6rFOq^Rq.uA0{OQJO">
+                                    <field name="VAR">PB:return</field>
+                                    <value name="VALUE">
+                                      <block type="text" id="%c6GAaA9NPZUgVMKAHS4">
+                                        <field name="TEXT">CALL</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="variables_get" id="nNAZC61,FmZLGHO;)8MK">
+        <field name="VAR">PB:return</field>
+      </block>
+    </value>
+  </block>
+</xml>
