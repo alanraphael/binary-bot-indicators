@@ -1,16 +1,4 @@
-﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
-  <block type="trade" id="w]EaR=t@R0f7r!Sxcq=}" x="433" y="22">
-    <field name="MARKET_LIST">indices</field>
-    <field name="SUBMARKET_LIST">europe_africa</field>
-    <field name="SYMBOL_LIST">AEX</field>
-    <field name="TRADETYPECAT_LIST">callput</field>
-    <field name="TRADETYPE_LIST">risefall</field>
-    <field name="TYPE_LIST">both</field>
-    <field name="CANDLEINTERVAL_LIST">60</field>
-    <field name="TIME_MACHINE_ENABLED">FALSE</field>
-    <field name="RESTARTONERROR">TRUE</field>
-  </block>
-  <block type="before_purchase" id="L~?vC6c)K`Pq,oQu$I]Y" x="276" y="372"></block>
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="true">
   <block type="procedures_defreturn" id="|!vA(o/o[JIeR2}{q72s" x="772" y="392">
     <mutation>
       <arg name="S:Input List"></arg>
@@ -332,5 +320,4 @@
       </block>
     </value>
   </block>
-  <block type="after_purchase" id="t#es=Qj8tR+|0=rmWF#x" x="277" y="621"></block>
 </xml>
