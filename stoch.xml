@@ -1,5 +1,32 @@
-﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="true">
-  <block type="procedures_defreturn" id="|!vA(o/o[JIeR2}{q72s" x="772" y="392">
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+  <block type="trade" id="xgH69|xFn9=70w.*3Vo@" x="0" y="0">
+    <field name="MARKET_LIST">volidx</field>
+    <field name="SUBMARKET_LIST">random_index</field>
+    <field name="SYMBOL_LIST">R_100</field>
+    <field name="TRADETYPECAT_LIST">callput</field>
+    <field name="TRADETYPE_LIST">risefall</field>
+    <field name="TYPE_LIST">both</field>
+    <field name="CANDLEINTERVAL_LIST">60</field>
+    <field name="TIME_MACHINE_ENABLED">FALSE</field>
+    <field name="RESTARTONERROR">TRUE</field>
+    <statement name="SUBMARKET">
+      <block type="tradeOptions" id="x=V33~4Lb|(sLv`J[:Eb">
+        <field name="DURATIONTYPE_LIST">t</field>
+        <field name="CURRENCY_LIST">USD</field>
+        <value name="DURATION">
+          <shadow type="math_number" id="O*@58sDc=!cOO}*b2vf9">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number" id="ml)25~7^q}3I9}vjf:%K">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defreturn" id="|!vA(o/o[JIeR2}{q72s" x="631" y="14">
     <mutation>
       <arg name="S:Input List"></arg>
       <arg name="S:Period"></arg>
@@ -7,36 +34,84 @@
     <field name="NAME">Stoch</field>
     <comment pinned="false" h="206" w="221">Describe this function...</comment>
     <statement name="STACK">
-      <block type="variables_set" id="9+tuK01o(:2AbN0uGQqi">
-        <field name="VAR">S:last_closing_price</field>
-        <value name="VALUE">
-          <block type="read_ohlc_obj" id="^:Y[L{/f`W^6y_kAcjf5">
-            <field name="OHLCFIELD_LIST">close</field>
-            <value name="OHLCOBJ">
-              <block type="lists_getIndex" id="Mz;deV~FurV*+{h8#}Ge">
-                <mutation statement="false" at="true"></mutation>
+      <block type="controls_if" id="1%v{9C9:+OY!.t^53-%#">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="math_number_property" id=";0to{X[Q6H)WO{q[(OAw">
+            <mutation divisor_input="false"></mutation>
+            <field name="PROPERTY">POSITIVE</field>
+            <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number" id="4;*{~2:%;+c@fY{;#]nc">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="lists_getIndex" id="PQMF9p2;.kOgFi$|(T~G">
+                <mutation statement="false" at="false"></mutation>
                 <field name="MODE">GET</field>
-                <field name="WHERE">FROM_END</field>
+                <field name="WHERE">LAST</field>
                 <value name="VALUE">
-                  <block type="variables_get" id="pCY7nVt!VkQwpDc(}*v+">
+                  <block type="variables_get" id="a0I9[z^r}J~$)3xAD0;5">
                     <field name="VAR">S:Input List</field>
-                  </block>
-                </value>
-                <value name="AT">
-                  <block type="math_number" id="Ups/Syr/P?W:7|/upu!j">
-                    <field name="NUM">2</field>
                   </block>
                 </value>
               </block>
             </value>
           </block>
         </value>
+        <statement name="DO0">
+          <block type="variables_set" id="@Y8I?4c08~PE$vzKi{qr">
+            <field name="VAR">S:input_type</field>
+            <value name="VALUE">
+              <block type="text" id="P~{Ugi7,AAan:_|!W58+">
+                <field name="TEXT">tick</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="%^TKZkMra?5/rQ(Jjz;l">
+                <field name="VAR">S:last_price</field>
+                <value name="VALUE">
+                  <block type="lists_getIndex" id="HjizYnQ4k-m#dZ,u%+Gy">
+                    <mutation statement="false" at="false"></mutation>
+                    <field name="MODE">GET</field>
+                    <field name="WHERE">LAST</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="VBVydc{-]2,zHjwW#TT4">
+                        <field name="VAR">S:Input List</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="9+tuK01o(:2AbN0uGQqi">
+            <field name="VAR">S:last_price</field>
+            <value name="VALUE">
+              <block type="read_ohlc_obj" id="^:Y[L{/f`W^6y_kAcjf5">
+                <field name="OHLCFIELD_LIST">close</field>
+                <value name="OHLCOBJ">
+                  <block type="lists_getIndex" id="Mz;deV~FurV*+{h8#}Ge">
+                    <mutation statement="false" at="false"></mutation>
+                    <field name="MODE">GET</field>
+                    <field name="WHERE">LAST</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="pCY7nVt!VkQwpDc(}*v+">
+                        <field name="VAR">S:Input List</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
         <next>
           <block type="variables_set" id="AdX8!:0RqA[Wg.vfu8bO">
             <field name="VAR">S:loop_i</field>
             <value name="VALUE">
               <block type="math_number" id="7i{uxz#6;O-:hF0`moIo">
-                <field name="NUM">0</field>
+                <field name="NUM">1</field>
               </block>
             </value>
             <next>
@@ -44,7 +119,7 @@
                 <field name="MODE">WHILE</field>
                 <value name="BOOL">
                   <block type="logic_compare" id="c,KP[yQq$xFTHLwP5;/y">
-                    <field name="OP">LT</field>
+                    <field name="OP">LTE</field>
                     <value name="A">
                       <block type="variables_get" id="ynrk(QrGw]Mk?;Xm2b0$">
                         <field name="VAR">S:loop_i</field>
@@ -58,30 +133,72 @@
                   </block>
                 </value>
                 <statement name="DO">
-                  <block type="variables_set" id="0#ka:LP)Q43,]S?r11sk">
-                    <field name="VAR">S:i</field>
-                    <value name="VALUE">
-                      <block type="read_ohlc_obj" id="!4a+dR%S6#(A_L50v!;E">
-                        <field name="OHLCFIELD_LIST">low</field>
-                        <value name="OHLCOBJ">
-                          <block type="lists_getIndex" id="9{$2{my7JrkIlNde=B]T">
+                  <block type="controls_if" id=":=w8tBmuzEp[[qc7o+EK">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="d$WP=D-hbI,:N@)}`T3H">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="2},LOa[FtgXDPIIu!#I3">
+                            <field name="VAR">S:input_type</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="text" id=":iJj$g7Zlgs4,pn+GQyI">
+                            <field name="TEXT">tick</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="|glB@SI$EIwzcI!9E[s|">
+                        <field name="VAR">S:i</field>
+                        <value name="VALUE">
+                          <block type="lists_getIndex" id="^R3G?/Z9B!?1uJ}_pY0s">
                             <mutation statement="false" at="true"></mutation>
                             <field name="MODE">GET</field>
                             <field name="WHERE">FROM_END</field>
                             <value name="VALUE">
-                              <block type="variables_get" id="_Y6BIkC7NEW3FP_~4y6.">
+                              <block type="variables_get" id="tmok6$K1]{$Xj?#jczJQ">
                                 <field name="VAR">S:Input List</field>
                               </block>
                             </value>
                             <value name="AT">
-                              <block type="variables_get" id="38zR/}m5E?26pK_4D1EL">
+                              <block type="variables_get" id="[Hh|M@=8=F_@m3{{[ZDt">
                                 <field name="VAR">S:loop_i</field>
                               </block>
                             </value>
                           </block>
                         </value>
                       </block>
-                    </value>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="variables_set" id="cU:6/}w{?-yMbd_IV0YG">
+                        <field name="VAR">S:i</field>
+                        <value name="VALUE">
+                          <block type="read_ohlc_obj" id="0?qO{_N7IEy+T|w[#XWl">
+                            <field name="OHLCFIELD_LIST">low</field>
+                            <value name="OHLCOBJ">
+                              <block type="lists_getIndex" id="5L-S_v6z7s:1o/B%9,Yq">
+                                <mutation statement="false" at="true"></mutation>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_END</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="hQi$JpGy+2NXA5_-y{uG">
+                                    <field name="VAR">S:Input List</field>
+                                  </block>
+                                </value>
+                                <value name="AT">
+                                  <block type="variables_get" id="Yd2C2lZHXKy![IID{AyE">
+                                    <field name="VAR">S:loop_i</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
                     <next>
                       <block type="controls_if" id="7bFEk.r_.V2xGft!l0#U">
                         <value name="IF0">
@@ -142,7 +259,7 @@
                     <field name="VAR">S:loop_j</field>
                     <value name="VALUE">
                       <block type="math_number" id="`48IJObHz;BRRHPdCRq!">
-                        <field name="NUM">0</field>
+                        <field name="NUM">1</field>
                       </block>
                     </value>
                     <next>
@@ -150,7 +267,7 @@
                         <field name="MODE">WHILE</field>
                         <value name="BOOL">
                           <block type="logic_compare" id="j1xs]Nv:__$ZZO]1vaE=">
-                            <field name="OP">LT</field>
+                            <field name="OP">LTE</field>
                             <value name="A">
                               <block type="variables_get" id="eS_;w`4~3O~xw{S6xHI8">
                                 <field name="VAR">S:loop_j</field>
@@ -164,30 +281,72 @@
                           </block>
                         </value>
                         <statement name="DO">
-                          <block type="variables_set" id="Cb1q!{:Afi7dm3Zy$H`y">
-                            <field name="VAR">S:j</field>
-                            <value name="VALUE">
-                              <block type="read_ohlc_obj" id="SfNP-C=]!XjiWgZFR/o/">
-                                <field name="OHLCFIELD_LIST">high</field>
-                                <value name="OHLCOBJ">
-                                  <block type="lists_getIndex" id="{+=Md.!D)]P$6n[]nL+8">
+                          <block type="controls_if" id="itw-4P#t{9C)yBWJP*w$">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="aG2Y*j*uq?N9xmlht(]2">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get" id="N`qYx_(3gCu~0aGqyL~i">
+                                    <field name="VAR">S:input_type</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="text" id="Qk8;Z7pxa8IAI0Yqsj(I">
+                                    <field name="TEXT">tick</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="X|?Ft#cb{CU7Zx){91O]">
+                                <field name="VAR">S:j</field>
+                                <value name="VALUE">
+                                  <block type="lists_getIndex" id="d[zBJxywr33};FJKs:9o">
                                     <mutation statement="false" at="true"></mutation>
                                     <field name="MODE">GET</field>
                                     <field name="WHERE">FROM_END</field>
                                     <value name="VALUE">
-                                      <block type="variables_get" id="v(*]#(Bgme.+Qih{v]vU">
+                                      <block type="variables_get" id="l;nAK$A]Lz(ctZIsOo(P">
                                         <field name="VAR">S:Input List</field>
                                       </block>
                                     </value>
                                     <value name="AT">
-                                      <block type="variables_get" id="Ay(5L%{j1ib[I=UG8gfm">
+                                      <block type="variables_get" id="DngG}p#R9!+tf!N1aS@,">
                                         <field name="VAR">S:loop_j</field>
                                       </block>
                                     </value>
                                   </block>
                                 </value>
                               </block>
-                            </value>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="variables_set" id="QT4VrI4uG+xP5;FG[oTj">
+                                <field name="VAR">S:j</field>
+                                <value name="VALUE">
+                                  <block type="read_ohlc_obj" id="1B`O|?o{ggtwgB01U];w">
+                                    <field name="OHLCFIELD_LIST">high</field>
+                                    <value name="OHLCOBJ">
+                                      <block type="lists_getIndex" id="R??mS/3UxJtvkvJ-HaK4">
+                                        <mutation statement="false" at="true"></mutation>
+                                        <field name="MODE">GET</field>
+                                        <field name="WHERE">FROM_END</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="W8`#,S2=7`s5EcBwN6Uv">
+                                            <field name="VAR">S:Input List</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT">
+                                          <block type="variables_get" id="zI/2VqvI,HvA`14pngD{">
+                                            <field name="VAR">S:loop_j</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
                             <next>
                               <block type="controls_if" id="X=BKa#oJdBk(s`|k{-AQ">
                                 <value name="IF0">
@@ -273,7 +432,7 @@
                     <field name="NUM">1</field>
                   </shadow>
                   <block type="variables_get" id="I~Fz+#0|sdz4sfxUTJ)!">
-                    <field name="VAR">S:last_closing_price</field>
+                    <field name="VAR">S:last_price</field>
                   </block>
                 </value>
                 <value name="B">
@@ -319,5 +478,26 @@
         </value>
       </block>
     </value>
+  </block>
+  <block type="before_purchase" id="i-CIx.(Onm4?ihxzA}Y]" x="0" y="301">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="purchase" id="W6q#Z-I3q3d[d3-`S[dS">
+        <field name="PURCHASE_LIST">CALL</field>
+      </block>
+    </statement>
+  </block>
+  <block type="during_purchase" id="(4;NieXd}j|Bn!c-YiC|" x="0" y="391">
+    <statement name="DURING_PURCHASE_STACK">
+      <block type="controls_if" id="8?eYKAW%VczmRXQ-ou3r">
+        <value name="IF0">
+          <block type="check_sell" id="M=:_KpEeRAJY_}XTU^8~"></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="D^Jz1^n=2vtZku1vBN@;" x="0" y="516">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="trade_again" id="c)S|KjoQdXc8l#J@5z3P"></block>
+    </statement>
   </block>
 </xml>
