@@ -1,0 +1,771 @@
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+  <block type="procedures_defnoreturn" id="1EVVv`Un=$tuhUCL,:(b" collapsed="true" x="127" y="-170">
+    <mutation>
+      <arg name="CG::Input List"></arg>
+      <arg name="CG::Tick Interval"></arg>
+    </mutation>
+    <field name="NAME">candle_generator</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="variables_set" id="{ikyxqe]lX#O$#?4q2fG">
+        <field name="VAR">Global::Input List</field>
+        <value name="VALUE">
+          <block type="variables_get" id="t!.@Bg2g`l8PO`_0geEg">
+            <field name="VAR">CG::Input List</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="Tw5w-viOv3yf#$x.51Y7">
+            <field name="VAR">Global::Tick Interval</field>
+            <value name="VALUE">
+              <block type="variables_get" id="ciqT4.j{0N+}#zs^PN!e">
+                <field name="VAR">CG::Tick Interval</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="tick_analysis" id="^imb!Gzi[.b`O[gOs4}r" collapsed="true" x="1268" y="-161">
+    <statement name="TICKANALYSIS_STACK">
+      <block type="lists_setIndex" id="%nLtupOnq!EK*J$CY=VB">
+        <mutation at="false"></mutation>
+        <field name="MODE">INSERT</field>
+        <field name="WHERE">LAST</field>
+        <value name="LIST">
+          <block type="variables_get" id="[zY*A6s(JDtc*rGx!mbn">
+            <field name="VAR">Global::Input List</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="tick" id="l(_Sqc*?;Fyg2oO)R=Ej"></block>
+        </value>
+        <next>
+          <block type="variables_set" id="oc8~u?qzW[j3^::+w|1~">
+            <field name="VAR">is_new_candle</field>
+            <value name="VALUE">
+              <block type="logic_boolean" id="SpvYXifA.7F`p/;:MK4S">
+                <field name="BOOL">FALSE</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="E}c8qV#cJ,jNKt*^F{FO">
+                <value name="IF0">
+                  <block type="logic_operation" id="2~s]~rgopv7Mrk+(aD[]">
+                    <field name="OP">OR</field>
+                    <value name="A">
+                      <block type="logic_negate" id=":#(-VuhkJ*4o?!W$;4|;">
+                        <value name="BOOL">
+                          <block type="variables_get" id="8oh6aY^{tD`OQL-B)Ly%">
+                            <field name="VAR">current_candle_time</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_compare" id="^c;{}ZMOyMI{mqceUVpn">
+                        <field name="OP">NEQ</field>
+                        <value name="A">
+                          <block type="lists_getIndex" id=";JP5+lE3*-)7A!{3$acV">
+                            <mutation statement="false" at="false"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">LAST</field>
+                            <value name="VALUE">
+                              <block type="procedures_callreturn" id="}`+UFhkoD47d4M;ipG-d">
+                                <mutation name="make_candle_list">
+                                  <arg name="MCL::Value"></arg>
+                                </mutation>
+                                <value name="ARG0">
+                                  <block type="text" id="T{mA=~^0LM(*`Z1.XXXA">
+                                    <field name="TEXT">ID</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="mCQkjPHgI0?#PA5w97~{">
+                            <field name="VAR">current_candle_time</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="#sU}j3B;js1k#S7-UQ#y">
+                    <field name="VAR">current_candle_time</field>
+                    <value name="VALUE">
+                      <block type="lists_getIndex" id="3/En_t+/S_+geI[I_)jQ">
+                        <mutation statement="false" at="false"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">LAST</field>
+                        <value name="VALUE">
+                          <block type="procedures_callreturn" id="eSD;Y*Z|Ir4?lFbr}c6M">
+                            <mutation name="make_candle_list">
+                              <arg name="MCL::Value"></arg>
+                            </mutation>
+                            <value name="ARG0">
+                              <block type="text" id="WV;u89U7|_AG}x~PNwIH">
+                                <field name="TEXT">ID</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="DEL~~([#SrEQ+/woNd_%">
+                        <field name="VAR">is_new_candle</field>
+                        <value name="VALUE">
+                          <block type="logic_boolean" id="MN31n{m-$.w3c=/s{01[">
+                            <field name="BOOL">TRUE</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defreturn" id="3/xh![man[Y|5Y+)S|4h" collapsed="true" x="94" y="14">
+    <field name="NAME">candle_time_generator</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="variables_set" id="w:S2$wX@Ki[s[Y5G=NO+">
+        <field name="VAR">CTG::list</field>
+        <value name="VALUE">
+          <block type="lists_create_with" id="o.1voAJ^iRDx@aoXHdS0">
+            <mutation items="0"></mutation>
+          </block>
+        </value>
+        <next>
+          <block type="controls_for" id="s9gpS#j$jtH)La)@B?bb">
+            <field name="VAR">j</field>
+            <value name="FROM">
+              <block type="math_arithmetic" id="{0PjS4):Qd7C5:XK!ky,">
+                <field name="OP">MINUS</field>
+                <value name="A">
+                  <shadow type="math_number" id=")QPR9(mz^ubi!19`*T:c">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="DIng-xPWc$e^JO5oqI[u">
+                    <field name="VAR">Global::Tick Interval</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="1Jj#H:u`BnczrIAFlpJ9">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_arithmetic" id="=hK3DY$sf9^6ASgtWiw;">
+                <field name="OP">MINUS</field>
+                <value name="A">
+                  <shadow type="math_number" id=".+STyL]p1W[jEq:KD)`1">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="lists_length" id="pee.[1U-0y|=an8mmnud">
+                    <value name="VALUE">
+                      <block type="variables_get" id="btdv68u(;`e$1ilplf5$">
+                        <field name="VAR">Global::Input List</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id=";TmB/^;$Z60o+O-dx^k=">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <value name="BY">
+              <block type="math_arithmetic" id="rXZD!RDjNS4:#[$:^MGO">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <shadow type="math_number" id="HX%w^8AB%)@R_M@Au;XV">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id=")E:UkiP0~;dVj`_@RNpe">
+                    <field name="VAR">Global::Tick Interval</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="M#r6#@g3~sE_,U_fDhx9">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="variables_set" id="({V7J%Ur.*oC|WM*`;g*">
+                <field name="VAR">CTG::bigger</field>
+                <value name="VALUE">
+                  <block type="math_number" id=";JwR?Glx6Ph1|1n5e=_@">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="Pf7c;Wf,%b]?z}8ioSON">
+                    <field name="VAR">CTG::smaller</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="L_cas.6f%L9*M^,t!U,i">
+                        <field name="NUM">1000000</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_for" id="x^NgY@se(]QLotSUv8d[">
+                        <field name="VAR">i</field>
+                        <value name="FROM">
+                          <block type="math_arithmetic" id="_zn?(Yq5`r0Sd%=e-1hJ">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <shadow type="math_number" id="[sZ%k}bIIYAAy|MuWoNu">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="variables_get" id=":8J(`V`ef!S:jTM)GD$y">
+                                <field name="VAR">j</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="(x_]HP?G{D@2d/A$b@_y">
+                                <field name="NUM">5</field>
+                              </shadow>
+                              <block type="variables_get" id="I~5uEs}=5!3WUSc5,Say">
+                                <field name="VAR">Global::Tick Interval</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="variables_get" id="U!Ph94OTuOKruhE./T3!">
+                            <field name="VAR">j</field>
+                          </block>
+                        </value>
+                        <value name="BY">
+                          <block type="math_number" id="eTGhP,c:(!yoGLQIqOS3">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="controls_if" id="xsozbjQNx6t[ov%uSjY[">
+                            <value name="IF0">
+                              <block type="logic_compare" id="w_G5yZY~E,W7l{OyqDNL">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="lists_getIndex" id="Sw!3vLCi+w21]IM8{_.s">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="z~Syc*L%:%I|N,=YO5XQ">
+                                        <field name="VAR">Global::Input List</field>
+                                      </block>
+                                    </value>
+                                    <value name="AT">
+                                      <block type="variables_get" id=":U-A.=a%XN!$$~o/U2{L">
+                                        <field name="VAR">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="variables_get" id="k`U?*Io|o=EJoW59`i`2">
+                                    <field name="VAR">CTG::bigger</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="z*[f$![Hs0JImZQ`C=dt">
+                                <field name="VAR">CTG::bigger</field>
+                                <value name="VALUE">
+                                  <block type="lists_getIndex" id="O:_IfK7vX1)0T]F+j3W{">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="ILla763n[Ti71$Vs67G#">
+                                        <field name="VAR">Global::Input List</field>
+                                      </block>
+                                    </value>
+                                    <value name="AT">
+                                      <block type="variables_get" id="hYCrI.2t3}4c@([X*7fP">
+                                        <field name="VAR">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="QicpbrVYX+M@kD$bBFX{">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="1ZC*8?[5;`H7Zo@f)OHL">
+                                    <field name="OP">LT</field>
+                                    <value name="A">
+                                      <block type="lists_getIndex" id=".Zr/l]s$_l=].m.g_+a2">
+                                        <mutation statement="false" at="true"></mutation>
+                                        <field name="MODE">GET</field>
+                                        <field name="WHERE">FROM_START</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="Gr5bzw_#WnoKPX(JewL{">
+                                            <field name="VAR">Global::Input List</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT">
+                                          <block type="variables_get" id="j:EKQk{VO^j]7O]n_FA{">
+                                            <field name="VAR">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="variables_get" id="(1DBpv.mp6FCHijilxVq">
+                                        <field name="VAR">CTG::smaller</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="Jz=i5H!xN4F#tKdV;f(h">
+                                    <field name="VAR">CTG::smaller</field>
+                                    <value name="VALUE">
+                                      <block type="lists_getIndex" id="09cWN-#({iMXJM+UXMh6">
+                                        <mutation statement="false" at="true"></mutation>
+                                        <field name="MODE">GET</field>
+                                        <field name="WHERE">FROM_START</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="w@g(^a}IYtaS`i*O4YHi">
+                                            <field name="VAR">Global::Input List</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT">
+                                          <block type="variables_get" id=";8`%YpT4?j@3-Ln5BXQ]">
+                                            <field name="VAR">i</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="lists_setIndex" id="Xf];9x(Y`6iT]e$cpEK_">
+                            <mutation at="false"></mutation>
+                            <field name="MODE">INSERT</field>
+                            <field name="WHERE">LAST</field>
+                            <value name="LIST">
+                              <block type="variables_get" id="y]*vOR;}bjO!-).EVrSD">
+                                <field name="VAR">CTG::list</field>
+                              </block>
+                            </value>
+                            <value name="TO">
+                              <block type="lists_create_with" id="$[nx933#bZkcqN_zu?pz">
+                                <mutation items="5"></mutation>
+                                <value name="ADD0">
+                                  <block type="math_arithmetic" id="h]k|z}3@B_nQj7div:Uj">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="/*Sr%FMW(P=($Nm8A_4W">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="math_arithmetic" id="8-0|0Jmz#5.ASlrX2SzP">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="VvJY%xz[U9R5!UE,e_S=">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="variables_get" id="NmvZr+C%9rHT5wS#7P`y">
+                                            <field name="VAR">CTG::bigger</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="wW^8M;1Z~^CS^v;c;5$V">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="lists_getIndex" id="PaRL!kEw!Q(%(1hwc~Mx">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE">
+                                              <block type="variables_get" id="X#B(jP0112/ccn:w-24p">
+                                                <field name="VAR">Global::Input List</field>
+                                              </block>
+                                            </value>
+                                            <value name="AT">
+                                              <block type="math_arithmetic" id="$BGEvp(|/RKx.Ci;B]dy">
+                                                <field name="OP">MINUS</field>
+                                                <value name="A">
+                                                  <shadow type="math_number" id="[sZ%k}bIIYAAy|MuWoNu">
+                                                    <field name="NUM">1</field>
+                                                  </shadow>
+                                                  <block type="variables_get" id="n6MK@k%!r=D%e!NZVbIo">
+                                                    <field name="VAR">j</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <shadow type="math_number" id="Hw5Z#7ZNr]roN2VcokC8">
+                                                    <field name="NUM">5</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="*]v|Gs@j~wTfXzFjo#d%">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="math_arithmetic" id="wt{4w@-BTpWL0@JGNS5@">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="4/i[{O4*Hj2kl{3=mkOD">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="variables_get" id="v4Z]2/.+7*eG!zJku]r?">
+                                            <field name="VAR">CTG::smaller</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="pwIC2O{ut?OcMBHMW|U^">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="lists_getIndex" id="jB=m+_TDvx!QK^GWlZC1">
+                                            <mutation statement="false" at="true"></mutation>
+                                            <field name="MODE">GET</field>
+                                            <field name="WHERE">FROM_START</field>
+                                            <value name="VALUE">
+                                              <block type="variables_get" id="{X/tVY}CNbhuhem)-wX,">
+                                                <field name="VAR">Global::Input List</field>
+                                              </block>
+                                            </value>
+                                            <value name="AT">
+                                              <block type="variables_get" id=".,tSO!L0LS{Ky3Yp)1J1">
+                                                <field name="VAR">j</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="lists_getIndex" id="`yFq4F^{?crRbip`O+9f">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="xCu_TW!9V.OytM~g-I3:">
+                                        <field name="VAR">Global::Input List</field>
+                                      </block>
+                                    </value>
+                                    <value name="AT">
+                                      <block type="math_arithmetic" id="YM9iQHpgy(7CKz,!uYJP">
+                                        <field name="OP">MINUS</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="[sZ%k}bIIYAAy|MuWoNu">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="variables_get" id="n]EPKH*bkdfjrzL`T*!k">
+                                            <field name="VAR">j</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="~H@1b~H__9q}t,]mTLP!">
+                                            <field name="NUM">5</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="variables_get" id="{TztYui!eT7DgUNt)W0u">
+                                    <field name="VAR">CTG::bigger</field>
+                                  </block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="variables_get" id="aW]tFO+MTjoNrf+2ppIW">
+                                    <field name="VAR">CTG::smaller</field>
+                                  </block>
+                                </value>
+                                <value name="ADD4">
+                                  <block type="lists_getIndex" id="EBmb+J|UMVxCw`rj=W1t">
+                                    <mutation statement="false" at="true"></mutation>
+                                    <field name="MODE">GET</field>
+                                    <field name="WHERE">FROM_START</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="m|J)`5aXi?I;w-c8rR,{">
+                                        <field name="VAR">Global::Input List</field>
+                                      </block>
+                                    </value>
+                                    <value name="AT">
+                                      <block type="variables_get" id="?GQU8(Zr^:jC3Zycl2@6">
+                                        <field name="VAR">j</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="lists_getIndex" id="gKPj!q)1E*E@[?huRA*{">
+                <mutation statement="true" at="false"></mutation>
+                <field name="MODE">REMOVE</field>
+                <field name="WHERE">FIRST</field>
+                <value name="VALUE">
+                  <block type="variables_get" id="|A7^_BE9GELeeEZ^bzk0">
+                    <field name="VAR">CTG::list</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="variables_get" id="K)*K^._nE0D|L`;|-6uT">
+        <field name="VAR">CTG::list</field>
+      </block>
+    </value>
+  </block>
+  <block type="procedures_defreturn" id="csl38Y^nt`H{z$7%TUP?" collapsed="true" x="373" y="197">
+    <mutation>
+      <arg name="MCL::Value"></arg>
+    </mutation>
+    <field name="NAME">make_candle_list</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="controls_if" id="SV}!LU:!Uhi_X8PV]BD9">
+        <mutation elseif="4"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="c,XvV[5E/I(@1~1}tYjf">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="kYWF%z*)8]+G`S+FX|`z">
+                <field name="VAR">MCL::Value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="text" id="RB`ic|M(rhMIl}L_dob7">
+                <field name="TEXT">Open</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="cf^zNg[k]*d?7qnV=s/M">
+            <field name="VAR">MCL::Value</field>
+            <value name="VALUE">
+              <block type="math_number" id="!$75?ViA#:?n]6x0_(Qs">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="7LRB_q}/jZz!(HVGV=E*">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="3#b$3:.jbhs8+-Y0D_Wx">
+                <field name="VAR">MCL::Value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="text" id="RbDR)@S;1;!by`(wd*he">
+                <field name="TEXT">High</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="variables_set" id="#C~qrI6Yyr2+ZbmJ|}O{">
+            <field name="VAR">MCL::Value</field>
+            <value name="VALUE">
+              <block type="math_number" id="}qI|.B4N7xg*5+2V{ltK">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF2">
+          <block type="logic_compare" id="R8C_un6B!g(KOyR`]q{0">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="9|uXFie*6EwN(P6OnGkV">
+                <field name="VAR">MCL::Value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="text" id="Y4Xu/=@QD#,Yld-iW7g=">
+                <field name="TEXT">Low</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO2">
+          <block type="variables_set" id="}$@Od.p8iZ3Vlkrso{-M">
+            <field name="VAR">MCL::Value</field>
+            <value name="VALUE">
+              <block type="math_number" id="m/SGxOf=R|Xy}*tH%@f;">
+                <field name="NUM">4</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF3">
+          <block type="logic_compare" id="+ge#SV@j8`S35`lt2t=^">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id=":.j{WTR*PHGb6(.Yxrjn">
+                <field name="VAR">MCL::Value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="text" id="G.~)-e7)v;lx~l*=39ny">
+                <field name="TEXT">Close</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO3">
+          <block type="variables_set" id="{6uCmYE8O,Z`|#$`~}Y5">
+            <field name="VAR">MCL::Value</field>
+            <value name="VALUE">
+              <block type="math_number" id="4DjMkie!A,808!SZM}8n">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF4">
+          <block type="logic_compare" id="FG90h.IMtG?/38T,Bz)2">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="w,LHQ}{p_{v(b0zZ*7:I">
+                <field name="VAR">MCL::Value</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="text" id="cTK5=td(@qoVc4dk7^f0">
+                <field name="TEXT">ID</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO4">
+          <block type="variables_set" id="=)[`Vo{hLiQfHvW~LC-|">
+            <field name="VAR">MCL::Value</field>
+            <value name="VALUE">
+              <block type="math_number" id="6D;[/mfY9%A1yCHnn{?2">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="variables_set" id="{*(1GLvyT1^*tYaR8yOH">
+            <field name="VAR">MCL::candle_list</field>
+            <value name="VALUE">
+              <block type="lists_create_with" id="x;+Cve7TjrIgmG-gZD-T">
+                <mutation items="0"></mutation>
+              </block>
+            </value>
+            <next>
+              <block type="controls_forEach" id="!BvBAfGF4=U%$zl5dI|?">
+                <field name="VAR">k</field>
+                <value name="LIST">
+                  <block type="procedures_callreturn" id="*Z5Z?VcNNik%5z+.ex?c">
+                    <mutation name="candle_time_generator"></mutation>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="lists_setIndex" id="bw~R6(mp7e3ZoOa9j@F}">
+                    <mutation at="false"></mutation>
+                    <field name="MODE">INSERT</field>
+                    <field name="WHERE">LAST</field>
+                    <value name="LIST">
+                      <block type="variables_get" id="F3lyyGZi;m0L[4`;fetN">
+                        <field name="VAR">MCL::candle_list</field>
+                      </block>
+                    </value>
+                    <value name="TO">
+                      <block type="lists_getIndex" id="!E_h6DntFq!4eDPp1bG,">
+                        <mutation statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_START</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="0i?i0OCnW)7JFZ!drYfG">
+                            <field name="VAR">k</field>
+                          </block>
+                        </value>
+                        <value name="AT">
+                          <block type="variables_get" id="rab`vXk/Lp.B5ax9TuF2">
+                            <field name="VAR">MCL::Value</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="lists_getIndex" id="8H4:X*QQlGP)`Iet.-O0">
+                    <mutation statement="true" at="false"></mutation>
+                    <field name="MODE">REMOVE</field>
+                    <field name="WHERE">FIRST</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="o~x6Jd|+O$q=~ddaNd~i">
+                        <field name="VAR">MCL::candle_list</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="variables_get" id="Fzi%Pih/x=-p[XAR7zwL">
+        <field name="VAR">MCL::candle_list</field>
+      </block>
+    </value>
+  </block>
+  <block type="procedures_defreturn" id="uQmBR{5lXcJc4SZ{tst7" collapsed="true" x="1441" y="222">
+    <mutation statements="false"></mutation>
+    <field name="NAME">is_new_candle</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <value name="RETURN">
+      <block type="variables_get" id="VaBG]V54U1(=Cs;p6Q/P">
+        <field name="VAR">is_new_candle</field>
+      </block>
+    </value>
+  </block>
+</xml>
