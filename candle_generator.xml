@@ -1,4 +1,4 @@
-﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="false">
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="true">
   <block type="procedures_defnoreturn" id="1EVVv`Un=$tuhUCL,:(b" collapsed="true" x="127" y="-170">
     <mutation>
       <arg name="CG::Input List"></arg>
