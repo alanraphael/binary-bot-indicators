@@ -1,0 +1,150 @@
+﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="true">
+  <variables>
+    <variable type="" id="FfUAm8,BYX=_:p)xS6w:">STD::Input List</variable>
+    <variable type="" id="JLmFc7uA;Z@I]X$0T!d:">STD::Period</variable>
+    <variable type="" id="OHA##H0qsd_sYj6P_XSy">STD::ema</variable>
+    <variable type="" id="emAVXhJWadHn|9_kfADe">STD::list_ap</variable>
+    <variable type="" id="-:KpPaG8]Cl:e84dI0IN">STD::j</variable>
+  </variables>
+  <block type="procedures_defreturn" id="!k~,TCH5Y%e^X/r$1v1@" collapsed="true" x="97" y="24">
+    <mutation>
+      <arg name="STD::Input List" varid="FfUAm8,BYX=_:p)xS6w:"></arg>
+      <arg name="STD::Period" varid="JLmFc7uA;Z@I]X$0T!d:"></arg>
+    </mutation>
+    <field name="NAME">std_dev</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="variables_set" id="zhYE:P{7w4#aJw|-HBr_">
+        <field name="VAR" id="OHA##H0qsd_sYj6P_XSy" variabletype="">STD::ema</field>
+        <value name="VALUE">
+          <block type="smaa" id="Q|=A%,]6T?%[c_p4e~U+">
+            <value name="INPUT">
+              <block type="variables_get" id="Mg4?`bwcjxs=-;[HL^.u">
+                <field name="VAR" id="FfUAm8,BYX=_:p)xS6w:" variabletype="">STD::Input List</field>
+              </block>
+            </value>
+            <value name="PERIOD">
+              <shadow type="math_number" id="_[{)ghAer#SBsuM)UGy-">
+                <field name="NUM">10</field>
+              </shadow>
+              <block type="variables_get" id="N[u|Y8C$f0rRQl-IZ*rB">
+                <field name="VAR" id="JLmFc7uA;Z@I]X$0T!d:" variabletype="">STD::Period</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="FMyiB!`Z%8/a5hzP(Uu?">
+            <field name="VAR" id="emAVXhJWadHn|9_kfADe" variabletype="">STD::list_ap</field>
+            <value name="VALUE">
+              <block type="lists_create_with" id="oHb,~7~0nrSKz^As!;Jd">
+                <mutation items="0"></mutation>
+              </block>
+            </value>
+            <next>
+              <block type="controls_for" id="@?{JGP:r)S(zbo2d{lv,">
+                <field name="VAR" id="-:KpPaG8]Cl:e84dI0IN" variabletype="">STD::j</field>
+                <value name="FROM">
+                  <block type="math_number" id="9D3/iNTFbpU?=Ad$UOj$">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="variables_get" id="N*dS=T5:F1O--N5IWUa7">
+                    <field name="VAR" id="JLmFc7uA;Z@I]X$0T!d:" variabletype="">STD::Period</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="math_number" id="t#O;Sg_^!-Onc|E~9p,.">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="lists_setIndex" id="C{V`|@V1Zdg2E,r*h^sl">
+                    <mutation at="false"></mutation>
+                    <field name="MODE">INSERT</field>
+                    <field name="WHERE">FIRST</field>
+                    <value name="LIST">
+                      <block type="variables_get" id="8^q{.=DE}O9khaSA$]U_">
+                        <field name="VAR" id="emAVXhJWadHn|9_kfADe" variabletype="">STD::list_ap</field>
+                      </block>
+                    </value>
+                    <value name="TO">
+                      <block type="math_arithmetic" id="Kzz;@A[L][Wwu-F9K2*C" inline="false">
+                        <field name="OP">POWER</field>
+                        <value name="A">
+                          <shadow type="math_number" id="3iC5.0$^xkCh4VdbyF@(">
+                            <field name="NUM">1</field>
+                          </shadow>
+                          <block type="math_arithmetic" id="5i[.k~@^|P#/+RC8300{" inline="false">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <shadow type="math_number" id="7dM`@MBvWK,K|Z[x1Jml">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="lists_getIndex" id="}C@5X;aS0%_^ao`vEZrr">
+                                <mutation statement="false" at="true"></mutation>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_END</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="Gh!sma3lkW7v=Y0^.7HQ">
+                                    <field name="VAR" id="FfUAm8,BYX=_:p)xS6w:" variabletype="">STD::Input List</field>
+                                  </block>
+                                </value>
+                                <value name="AT">
+                                  <block type="variables_get" id="N_MU~E#!bt2?Ri8Xo^mp">
+                                    <field name="VAR" id="-:KpPaG8]Cl:e84dI0IN" variabletype="">STD::j</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="MD%SS$%)8fumHV|MxQE.">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="lists_getIndex" id="K]`sPK,5aY.WO9Aw[C%(">
+                                <mutation statement="false" at="true"></mutation>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_END</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="Bwc~oI+[r2-L,l:6E/7y">
+                                    <field name="VAR" id="OHA##H0qsd_sYj6P_XSy" variabletype="">STD::ema</field>
+                                  </block>
+                                </value>
+                                <value name="AT">
+                                  <block type="variables_get" id="Cu9jV,|)UURyqEAbAy43">
+                                    <field name="VAR" id="-:KpPaG8]Cl:e84dI0IN" variabletype="">STD::j</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="mJD3l;_bbTI=A)UhDC@R">
+                            <field name="NUM">2</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="math_on_list" id="RiwaT0S,jis,yi~zFnu*">
+        <mutation op="STD_DEV"></mutation>
+        <field name="OP">STD_DEV</field>
+        <value name="LIST">
+          <block type="variables_get" id="+*P:G0+kaCmby}{r#oNH">
+            <field name="VAR" id="emAVXhJWadHn|9_kfADe" variabletype="">STD::list_ap</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+</xml>
